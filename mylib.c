@@ -32,8 +32,21 @@ We first draw the top row, then the leftmost coloumn. We then draw the
 bottom rectangle, and then the rightmost. 
 **/
 void drawHollowRect(int r, int c, int width, int height, u16 color) {
-    drawRect(r, r, width, 1, color);
-	drawRect(r, r, 1, height, color);
-    drawRect(r+height, r, 1, height, color);
-    drawRect(r, c+width, width, 1, color);
+    int i;
+    int j;
+    for (i = r; i<(r+height) && 160; i++) {
+        setPixel(i,c,color);
+        j = c + width-1;
+        if (j<=240) {
+            setPixel(i, j, color);
+        }
+    }
+
+    for (j = c; j<(c+width) && 240; j++) {
+        setPixel(r, j, color);
+        i = r + height-1;
+        if (i<=160) {
+            setPixel(i , j, color);
+        }
+    }
 }
